@@ -1,0 +1,28 @@
+<launch>
+  <arg name="use_sim_time" default="true" />
+  <arg name="headless" default="false" />
+  <arg name="gui" default="true"/>
+  <arg name="verbose" default="true"/>
+  <arg name="world_file"  default="$(find hybrid_rl_training)/worlds/zigzag_dense.world"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="0" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="world_name" value="$(arg world_file)" />
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="world" args="0 0 0 0 0 0 1 ground_truth odom 100" />
+  <node type="rviz" name="rviz1" pkg="rviz" args="-d $(find hybrid_rl_training)/rviz/naviswarm.rviz" />
+
+  <arg name="ns0"        default="turtlebot0"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns0)"/>
+    <arg name="x"             value="1"/>
+    <arg name="y"             value="0"/>
+    <arg name="yaw"             value="0"/>
+  </include>
+
+</launch>
+

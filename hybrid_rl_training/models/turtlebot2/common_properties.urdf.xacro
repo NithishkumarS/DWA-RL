@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!--
+  Various useful properties such as constants and materials 
+ -->
+<robot name="xacro_properties" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="M_PI" value="3.1415926535897931" /> 
+  <xacro:property name="material_white">
+    <material name="white">
+      <color rgba="1 1 1 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_grey">
+    <material name="grey">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_light_grey">
+    <material name="light_grey">
+      <color rgba="0.6 0.6 0.6 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_dark_grey">
+    <material name="dark_grey">
+      <color rgba="0.3 0.3 0.3 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_black">
+    <material name="black">
+      <color rgba="0.1 0.1 0.1 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_red">
+    <material name="red">
+      <color rgba="1 0 0 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_green">
+    <material name="green">
+      <color rgba="0.0 0.8 0.0 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_blue">
+    <material name="blue">
+      <color rgba="0.0 0.0 1.0 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_grey_blue">
+    <material name="grey_blue">
+      <color rgba="0.4 0.4 1.0 1"/>
+    </material>
+  </xacro:property>
+  <xacro:property name="material_orange">
+    <material name="orange">
+      <color rgba="1.0 0.7 0.0 1"/>
+    </material>
+  </xacro:property>
+
+
+  <!-- 
+    These properties must be observed by any machine
+    that wants to be defined as a turtlebot. Refer
+    to the REP for more details.
+    
+    http://www.ros.org/reps/rep-0119.html
+   -->
+   
+  <!--
+   ======================================================================
+   - REP 119 : Rgb camera link relative to the Base link 
+   ====================================================================== 
+     Base link is currently defined as the rotational centre on the bottom
+     of the base mould. For both create and kobuki this is actually exactly
+     the same 3d world point. 
+     
+     This may cause an issue with a base with much different floor clearance.
+     Should we be using base_footprint for this specification instead?
+ 
+     Note: REP needs to be updated with the information below 
+     (currently in development and awaiting feedback)
+   -->
+  <xacro:property name="cam_px" value="-0.087" />
+<!--  <xacro:property name="cam_py" value="-0.0125" /> Y varies for different configurations. get sets in sensors_urdf -->
+  <xacro:property name="cam_pz" value="0.2870" />
+  <xacro:property name="cam_or" value="0" />
+  <xacro:property name="cam_op" value="0" />
+  <xacro:property name="cam_oy" value="0" />
+</robot>

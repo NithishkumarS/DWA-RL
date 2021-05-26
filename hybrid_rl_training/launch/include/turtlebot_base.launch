@@ -1,0 +1,33 @@
+<launch>
+
+	<arg name="urdf_file" default="$(find xacro)/xacro.py '$(find hybrid_rl_training)/models/turtlebot2/turtlebot.urdf.xacro'"/>
+	<arg name="ns"        default="turtlebot1"/>
+	<arg name="x"         default="0"/>
+	<arg name="y"         default="0"/>
+	<arg name="z"         default="0"/>
+	<arg name="roll"      default="0"/>
+	<arg name="pitch"     default="0"/>
+	<arg name="yaw"       default="0"/>
+	
+	<param name="/$(arg ns)/robot_description" command="$(arg urdf_file) namespace:=$(arg ns)"/>
+	<node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"  ns="$(arg ns)"
+	        args="-urdf -param /$(arg ns)/robot_description -model $(arg ns) -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+
+	<node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager" ns="$(arg ns)"/>
+	<node pkg="nodelet" type="nodelet" name="cmd_vel_mux" ns="$(arg ns)"
+	        args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager" >
+		<param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml"/>
+		<remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
+	</node>
+
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="$(arg ns)">
+		<param name="tf_prefix"         value="$(arg ns)"/>
+		<param name="publish_frequency" type="double" value="30.0" />
+	</node>
+
+	<node pkg="laser_filters" type="scan_to_scan_filter_chain"
+	name="filter_chain" ns="$(arg ns)">
+		<rosparam command="load" file="$(find hybrid_rl_training)/models/hokuyo/config.yaml" />
+	</node>
+
+</launch>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : kinect
+-->    
+
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find hybrid_rl_training)/models/turtlebot2/common_properties.urdf.xacro" />
+  
+  <xacro:include filename="$(find hybrid_rl_training)/models/turtlebot2/kobuki/kobuki.urdf.xacro" />
+
+  <xacro:include filename="$(find hybrid_rl_training)/models/turtlebot2/stacks/hexagons.urdf.xacro"/>
+
+  <!--sensors-->
+  <xacro:include filename="$(find hybrid_rl_training)/models/turtlebot2/sensors/hokuyo.urdf.xacro"/>
+  <xacro:include filename="$(find hybrid_rl_training)/models/turtlebot2/sensors/r200.urdf.xacro"/>
+  <!--xacro:include filename="$(find slam_ros)/models/urdf/sensors/asus_xtion_pro.urdf.xacro"/>
+  <xacro:include filename="$(find slam_ros)/models/urdf/sensors/asus_xtion_pro_offset.urdf.xacro"/-->
+  
+  <kobuki/>
+  <stack_hexagons parent="base_link"/>
+  <sensor_r200  parent="base_link"/>
+  <sensor_hokuyo parent="base_link"/>
+</robot>

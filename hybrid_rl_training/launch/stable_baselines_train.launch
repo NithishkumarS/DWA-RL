@@ -1,0 +1,5 @@
+<launch>
+    <rosparam command="load" file="$(find hybrid_rl_training)/config/turtlebot_deepq.yaml" />
+    <!-- Launch the training system -->
+    <node pkg="hybrid_rl_training" name="stable_training" type="stable_baselines_train.py" output="screen"/> 
+</launch>

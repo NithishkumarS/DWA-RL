@@ -1,0 +1,60 @@
+<launch>
+  <arg name="use_sim_time" default="true" />
+  <arg name="headless" default="false" />
+  <arg name="gui" default="true"/>
+  <arg name="verbose" default="true"/>
+  <arg name="world_file"  default="$(find hybrid_rl_training)/worlds/train2.world"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="0" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="world_name" value="$(arg world_file)" />
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="world" args="0 0 0 0 0 0 1 ground_truth odom 100" />
+  <!--node type="rviz" name="rviz1" pkg="rviz" args="-d $(find hybrid_rl_training)/rviz/naviswarm.rviz" /-->
+
+  <arg name="ns0"        default="turtlebot0"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns0)"/>
+    <arg name="x"             value="0.8866"/>
+    <arg name="y"             value="0.24"/>
+    <arg name="yaw"             value="0"/>
+  </include>
+
+  <arg name="ns1"        default="turtlebot1"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns1)"/>
+    <arg name="x"             value="1.18"/>
+    <arg name="y"             value="12.15"/>
+    <arg name="yaw"             value="0"/>
+  </include>
+
+
+  <arg name="ns2"        default="turtlebot2"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns2)"/>
+    <arg name="x"             value="-10.085"/>
+    <arg name="y"             value="12.15"/>
+    <arg name="yaw"             value="3.14"/>
+  </include>
+
+
+  <arg name="ns3"        default="turtlebot3"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns3)"/>
+    <arg name="x"             value="-11"/>
+    <arg name="y"             value="-0.03"/>
+    <arg name="yaw"             value="3.14"/>
+  </include>
+
+  <!--arg name="ns4"        default="turtlebot4"/>
+  <include file="$(find hybrid_rl_training)/launch/include/turtlebot_base.launch">
+    <arg name="ns"            value="$(arg ns4)"/>
+    <arg name="y"             value="2"/>
+    <arg name="x"             value="2"/>
+  </include-->
+
+</launch>

@@ -1,0 +1,53 @@
+turtlebot2: #namespace
+
+    
+    # DeepQ Parameters
+    max_timesteps: 1000 # Maximum time steps of all the steps done throughout all the episodes
+    buffer_size: 500 # size of the replay buffer
+    lr: 1e-3 # learning rate for adam optimizer
+    exploration_fraction: 0.2 # fraction of entire training period over which the exploration rate is annealed
+    exploration_final_eps: 0.05 # final value of random action probability
+    print_freq: 1 # how often (Ex: 1 means every episode, 2 every two episode we print ) to print out training progress set to None to disable printing
+    
+    reward_task_learned: 10000
+    
+    # Learning General Parameters
+    n_actions: 3 # We have 3 actions
+    n_observations: 1 # We have 6 different observations
+
+    speed_step: 1.0 # Time to wait in the reset phases
+
+    init_roll_vel: 0.0 # Initial speed of the Roll Disk
+
+    roll_speed_fixed_value: 100.0 # Speed at which it will move forwards or backwards
+    roll_speed_increment_value: 10.0 # Increment that could be done in each step
+
+    max_distance: 2.0 # Maximum distance allowed for the RobotCube
+    max_pitch_angle: 0.2 # Maximum Angle radians in Pitch that we allow before terminating episode
+    max_yaw_angle: 0.1 # Maximum yaw angle deviation, after that it starts getting negative rewards
+
+    max_y_linear_speed: 100 # Free fall get to around 30, so we triple it 
+
+    init_cube_pose:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+
+   
+    move_distance_reward_weight: 1000.0 # Multiplier for the moved distance reward, Ex: inc_d = 0.1 --> 100points
+    y_linear_speed_reward_weight: 1000.0 # Multiplier for moving fast in the y Axis
+    y_axis_angle_reward_weight: 1000.0 # Multiplier of angle of yaw, to keep it straight
+
+
+    linear_forward_speed: 1
+    linear_turn_speed: 0.2
+    angular_speed: 0.1
+    init_linear_forward_speed: 0.3
+    init_linear_turn_speed: 0.4
+    n_observations: 1
+    min_range: 0.5
+    max_laser_value: 4
+    min_laser_value: 0.05
+    forwards_reward: 5
+    turn_reward: 100
+    end_episode_points: 1000
