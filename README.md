@@ -60,3 +60,10 @@ Test scenarios
 
 Link to the video [![Presentation](https://www.youtube.com/watch?v=iuPs5BPgbCI&feature=youtu.be)](https://www.youtube.com/watch?v=iuPs5BPgbCI&feature=youtu.be).
 
+## Citation 
+If you find this repository useful, please cite us.
+
+> U. Patel, N. K. S. Kumar, A. J. Sathyamoorthy, and D. Manocha,  
+> *"DWA-RL: Dynamically Feasible Deep Reinforcement Learning Policy for Robot Navigation among Mobile Obstacles,"*  
+> 2021 IEEE International Conference on Robotics and Automation (ICRA), Xi'an, China, 2021, pp. 6057-6063.  
+> DOI: [10.1109/ICRA48506.2021.9561462](https://doi.org/10.1109/ICRA48506.2021.9561462)  
